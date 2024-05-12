@@ -1,0 +1,57 @@
+  docker search openJDK
+  docker images
+  docker run openjdk
+  docker run openjdk:23-jdk
+  docker run -dit openjdk
+  docker run -it openjdk
+  docker ps
+  docker exec 7a96
+  docker exec 7a96 ls 
+  docker exec 7a96 ls -a
+  docker exec 7a96 ls /usr
+  docker exec 7a96 ls /temp
+  docker exec 7a96 ls /tmp
+  docker ps 
+
+  docker commit 7a96 myimage:version1
+  docker commit 7a96 myfirstjdkimage:version1
+  docker images
+  docker run myfirstjdkimage run
+  docker images
+  docker run myfirstjdkimage 
+  docker run myfirstjdkimage:version1
+  docker run -dit  myfirstjdkimage:version1
+  docker cp target/docker-demo.jar 7a96:/tmp
+  docker exec 7a96 ls /tmp
+  docker commit 7a96 myfirstjdkimage:version2
+  docker commit --change='CMD ["java","-jar","/tmp/docker-demo"]' 7a96 myfirstjdkimage:version3
+  docker run myfirstjdkimage:version3
+  docker commit --change='CMD ["java","-jar","/tmp/docker-demo.jar"]' 7a96 myfirstjdkimage:version3
+  docker run myfirstjdkimage:version3
+  docker run -p 8080:8080 myfirstjdkimage:version3
+
+  docker run myfirstjdkimage 
+  docker run myfirstjdkimage:version1
+  docker run -dit  myfirstjdkimage:version1
+  docker cp target/docker-demo.jar 7a96:/tmp
+  docker exec 7a96 ls /tmp
+  docker commit 7a96 myfirstjdkimage:version2
+  docker commit --change='CMD ["java","-jar","/tmp/docker-demo"]' 7a96 myfirstjdkimage:version3
+
+  docker run myfirstjdkimage:version3
+  docker commit --change='CMD ["java","-jar","/tmp/docker-demo.jar"]' 7a96 myfirstjdkimage:version3
+  docker run myfirstjdkimage:version3
+  docker run -p 8080:8080 myfirstjdkimage:version3
+
+ 
+  docker build -t myfirstjdkimage/docker-demo:version3
+  docker build -t myfirstjdkimage/docker-demo:version3 .
+  docker images
+
+  docker build -t mycontainer:v1 .
+  docker build -t mycontainer:v2 .
+  docker run -p 8080:8080 mycontainer:v1
+  docker run mycontainer:v1
+
+
+
