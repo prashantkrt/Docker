@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8085:8085"
+    networks:
+     - emp-network
+
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin@123
+      POSTGRES_DB: postgres
+    ports:
+      - 5433:5432
+    networks:
+      - emp-network
+    volumes:
+      - postgres-e-data:/var/lib/postgresql/data
+
+networks:
+  emp-network:
+    driver: bridge
+
+volumes:
+  postgres-e-data:
+
+
+
+
+
+
+

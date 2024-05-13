@@ -53,5 +53,13 @@
   docker run -p 8080:8080 mycontainer:v1
   docker run mycontainer:v1
 
+ docker network ls 
+ docker-compose up --build
+ docker-compose up --build
+ docker-compose down
+ docker-compose up --build
+ docker-compose down
+
+
 
 
