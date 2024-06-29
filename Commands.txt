@@ -83,6 +83,7 @@ ENTRYPOINT ["java","-jar","postgres-demo-v1.jar"]
  docker compose up 
  docker compose down 
  
+//docker-compose.yml 
 version: "3.7"
 
 services:
