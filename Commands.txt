@@ -1,3 +1,124 @@
+important docker commands 
+
+docker --version 
+docker images 
+docker ps 
+docker ps -a
+docker remove 2948fc6b25df //remove the container
+docker rm conatinerid/containername
+docker rmi image-name/imageid
+
+docker run hello-world // runs the image within the conatiner 
+//it is the combination of all the steps like pull,create and start
+
+docker start b67d30803943 //starts the container
+
+docker create hello-world // pulls the images if not exist and creates the container 
+// it will not run the container just create 
+
+docker search hello-world // searchs in the docker hub 
+docker pull hello-world // pull the images 
+
+docker stop containerid // to stop the container
+docker pausse containerid // it will only pause if running else error will come
+
+
+Docker has various components
+- docker images
+- docker container 
+- docker network
+- docker volumes 
+- docker deamon( also dockerd -> resonsible for all the client interactions like pull rm run config create volumes etc..)
+
+
+docker run openjdk:24-slim-bullseye // with version tags 
+
+docker run -dit openjdk:24-slim-bullseye // run in detach mode run in background and come out !!
+docker run -it openjdk:24-slim-bullseye // interative mode for continous execution
+
+docker exec 7a96 ls 
+bin
+boot
+dev
+etc
+home
+lib
+lib64
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+
+docker exec containerName ls/tmp
+
+docker cp target/docker-demo.jar 7a96:/tmp
+
+docker commit 7a96 myfirstjdkimage:version2
+
+docker commit --change='CMD ["java","-jar","/tmp/docker-demo"]' 7a96 myfirstjdkimage:version3
+
+docker run myfirstjdkimage:version3
+
+//expose port outside of the docker network
+ docker run -p 8080:8080 myfirstjdkimage:version3
+
+Dockerfile 
+FROM openjdk:latest
+ADD build/libs/postgres-demo-v1.jar postgres-demo-v1.jar
+ENTRYPOINT ["java","-jar","postgres-demo-v1.jar"]
+
+//post docker file 
+ docker build -t myfirstjdkimage/docker-demo:version3
+
+ //for multiple images /container 
+
+ docker compose up 
+ docker compose down 
+ 
+version: "3.7"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8085:8085"
+    networks:
+     - emp-network
+
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin@123
+      POSTGRES_DB: postgres
+    ports:
+      - 5433:5432
+    networks:
+      - emp-network
+    volumes:
+      - postgres-e-data:/var/lib/postgresql/data
+
+networks:
+  emp-network:
+    driver: bridge
+
+volumes:
+  postgres-e-data:
+
+docker compose up --build
+  
+  
+// Commands executed as per my terminal history   
+  
   docker search openJDK
   docker images
   docker run openjdk
