@@ -1,0 +1,73 @@
+##Docker Commands Step by Step##
+
+docker --version 
+docker images // gives the images
+docker ps  // running container
+docker ps -a //all the container 
+docker remove 2948fc6b25df //remove the container 
+docker rm conatinerid/containername 
+docker rmi image-name/imageid  //remove the image
+
+docker run hello-world // runs the image within the conatiner 
+//it is the combination of all the steps like pull,create and start
+
+docker start b67d30803943 //starts the container
+
+docker create hello-world // pulls the images if not exist and creates the container 
+// it will not run the container just create 
+
+docker search hello-world // searchs in the docker hub 
+docker pull hello-world // pull the images 
+
+docker stop containerid // to stop the container
+docker pause containerid // it will only pause if running else error will come
+
+
+docker run openjdk:24-slim-bullseye // with version tags 
+
+docker run -dit openjdk:24-slim-bullseye // run in detach mode run in background and come out !!
+docker run -it openjdk:24-slim-bullseye // interative mode for continous execution 
+
+##execute command within the container using exec
+
+docker exec 7a96 ls // exec within the container for listing the folders in container
+docker exec containerName ls/tmp
+
+##copy file to container
+
+docker cp target/docker-demo.jar 7a96:/tmp  //cp from toContainer:/folder
+
+
+##commit to give the image name for your application
+
+docker commit 7a96 myfirstjdkimage:version2
+
+docker run myfirstjdkimage:v3 // by default Command is set to jshell for openjdk container
+
+##changing --change ='CMD []'
+docker commit --change='CMD ["java","-jar","/tmp/docker-demo"]' 7a96 myfirstjdkimage:v3
+
+//expose port and run
+docker run -p 8080:8080 myfirstjdkimage:v3
+
+
+##Using Docker File name as Dockerfile
+// Doing same thing as below 
+docker commit --change='CMD ["java","-jar","/tmp/docker-demo"]' 7a96 myfirstjdkimage:v3
+
+Using Dockerfile
+
+FROM openjdk:latest
+ADD build/libs/postgres-demo-v1.jar postgres-demo-v1.jar
+ENTRYPOINT ["java","-jar","postgres-demo-v1.jar"]
+
+//then build the docker file 
+using docker build -tag imagename:version
+docker build -t myfirstjdkimage/docker-demo:version3
+
+//then run the application
+docker run -p 8080:8080 myfirstjdkimage/docker-demo:version3
+
+
+
+
