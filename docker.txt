@@ -3,15 +3,15 @@
 docker --version 
 docker images // gives the images
 docker ps  // running container
-docker ps -a //all the container 
-docker remove 2948fc6b25df //remove the container 
+docker ps -a // all the container 
+docker remove 2948fc6b25df // remove the container 
 docker rm conatinerid/containername 
-docker rmi image-name/imageid  //remove the image
+docker rmi image-name/imageid  // remove the image
 
 docker run hello-world // runs the image within the conatiner 
 //it is the combination of all the steps like pull,create and start
 
-docker start b67d30803943 //starts the container
+docker start b67d30803943 // starts the container
 
 docker create hello-world // pulls the images if not exist and creates the container 
 // it will not run the container just create 
@@ -35,7 +35,7 @@ docker exec containerName ls/tmp
 
 ##copy file to container
 
-docker cp target/docker-demo.jar 7a96:/tmp  //cp from toContainer:/folder
+docker cp target/docker-demo.jar 7a96:/tmp  // cp from toContainer:/folder
 
 
 ##commit to give the image name for your application
@@ -69,5 +69,44 @@ docker build -t myfirstjdkimage/docker-demo:version3
 docker run -p 8080:8080 myfirstjdkimage/docker-demo:version3
 
 
+
+###Docker compose###
+
+
+version: "3.7"  //provide the version 
+
+services: // for your application and it's dependencies 
+  app:   
+    build: .  // current file 
+    ports:
+      - "8085:8085" //expose port
+    networks:
+     - emp-network  //add the network same as your postgress 
+
+
+  postgres:   //postgres config
+    image: postgres:latest   
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin@123
+      POSTGRES_DB: postgres
+    ports:
+      - 5433:5432
+    networks:
+      - emp-network
+    volumes:
+      - postgres-e-data:/var/lib/postgresql/data  // volumeName and /var/lib/postgresql/data path in the container to store the data 
+
+
+networks:  //creating the netwrok
+  emp-network: //netwrok name 
+    driver: bridge  //type 
+
+volumes:
+  postgres-e-data: //volume name
+
+
+// to execute 
+docker compose up --build
 
 
