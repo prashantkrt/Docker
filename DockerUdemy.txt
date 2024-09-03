@@ -1,0 +1,68 @@
+
+##Basic Commands for Devops##
+
+yum install docker
+docker --version
+docker info
+service docker start 
+docker info
+
+docker images 
+docker ps 
+docker ps -a
+docker run hello-world
+docker images 
+docker ps -a 
+docker ps 
+docker run -it ubuntu bash
+docker images 
+docker ps
+docker ps -a
+
+// detach interative mode
+docker run -dit -p 80:80 nginx
+
+docker stop containerName
+
+##docker remove
+
+docker rm containerName/id
+docker rm -f containerId/Name // force delete
+docker rmi imageName/id
+
+## docker run
+docker run -i -t -d nginx  // - interactive - terminal - detach (-dit)
+
+#assigning the name instead of random name
+docker run -idt --name=myserver nginx  // assigning your name
+docker stop myserver
+
+// -p hostPort(localMachine):containerPort
+docker run -itd --name=mynewserver -p 8000:80 nginx
+
+//remove multiple containers
+docker rm ba9f55 4e0c9ba
+
+docker pause containerName
+docker restart containerName
+
+##docker commit
+
+// running the ubuntu
+docker run -idt ubuntu 
+docker exec -it b83f2 bash
+
+apt-get update
+//installing the apace server
+apt-get install apache2
+
+service apache2 status 
+service apache2 start
+exit
+
+//once modified create the image of the upbuntu container
+docker commit b83f27 myubuntu
+
+docker run -dit --name=myubuntucontainer myubuntu
+docker exec 34faa6 ls
+
