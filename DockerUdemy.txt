@@ -124,3 +124,42 @@ ls
 cd mydata
 ls  //verify
 
+
+##Docker Network 
+docker network ls 
+docker network inspect bridge //details 
+
+docker network create demonwk --subnet=172.19.0.0/16
+
+docker run --name webserver --net demonwk --ip 172.19.0.2 -h web.anyhostname.com -p 81:80 -ti ubuntu /bin/bash
+
+when you're working with Docker, pressing Ctrl + P followed by Ctrl + Q is used to detach from a running Docker container and leave it running in the background. 
+
+The command : -> docker attach webserver  , allows you to attach your terminal session to a running Docker container named webserver
+docker attach webserver //reattach
+
+//change the network or disconnect
+docker network disconnect demonwk webserver
+//verify 
+docker network demonwk
+
+//connecting to the new network (bridge)to my container webserver
+docker network connect bridge webserver
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
