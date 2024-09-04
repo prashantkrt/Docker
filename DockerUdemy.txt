@@ -1,4 +1,3 @@
-
 ##Basic Commands for Devops##
 
 yum install docker
@@ -127,7 +126,7 @@ ls  //verify
 
 ##Docker Network 
 docker network ls 
-docker network inspect bridge //details 
+docker netwrk inspect bridge //details 
 
 docker network create demonwk --subnet=172.19.0.0/16
 
@@ -141,10 +140,29 @@ docker attach webserver //reattach
 //change the network or disconnect
 docker network disconnect demonwk webserver
 //verify 
-docker network demonwk
+=>docker network demonwk
 
 //connecting to the new network (bridge)to my container webserver
-docker network connect bridge webserver
+=> docker network connect bridge webserver
+
+##Dockerfile 
+-FROM 
+-COPY 
+-ENV
+-RUN
+-CMD
+-EXPOSE
+
+vi Dockerfile 
+
+//example 
+FROM centos:latest
+RUN yum install -y httpd
+ADD index.html /var/www/html/
+CMD apachectl -D FOREGROUND
+EXPOSE 80
+MAINTANER Prashant 
+ENV myenv myval
 
 
 
