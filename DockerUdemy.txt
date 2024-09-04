@@ -19,37 +19,37 @@ docker ps
 docker ps -a
 
 // detach interative mode
-docker run -dit -p 80:80 nginx
+=> docker run -dit -p 80:80 nginx
 
-docker stop containerName
+=> docker stop containerName
 
 ##docker remove
 
-docker rm containerName/id
-docker rm -f containerId/Name // force delete
-docker rmi imageName/id
+=> docker rm containerName/id
+=> docker rm -f containerId/Name // force delete
+=> docker rmi imageName/id
 
 ## docker run
-docker run -i -t -d nginx  // - interactive - terminal - detach (-dit)
+=> docker run -i -t -d nginx  // - interactive - terminal - detach (-dit)
 
 #assigning the name instead of random name
-docker run -idt --name=myserver nginx  // assigning your name
-docker stop myserver
+=> docker run -idt --name=myserver nginx  // assigning your name
+=> docker stop myserver
 
 // -p hostPort(localMachine):containerPort
-docker run -itd --name=mynewserver -p 8000:80 nginx
+=> docker run -itd --name=mynewserver -p 8000:80 nginx
 
 //remove multiple containers
-docker rm ba9f55 4e0c9ba
+=> docker rm ba9f55 4e0c9ba
 
-docker pause containerName
-docker restart containerName
+=> docker pause containerName
+=> docker restart containerName
 
 ##docker commit
 
 // running the ubuntu
-docker run -idt ubuntu 
-docker exec -it b83f2 bash
+=> docker run -idt ubuntu 
+=> docker exec -it b83f2 bash
 
 apt-get update
 //installing the apace server
@@ -60,22 +60,22 @@ service apache2 start
 exit
 
 //once modified create the image of the upbuntu container
-docker commit b83f27 myubuntu
+=> docker commit b83f27 myubuntu
 
-docker run -dit --name=myubuntucontainer myubuntu
-docker exec 34faa6 ls
+=> docker run -dit --name=myubuntucontainer myubuntu
+=> docker exec 34faa6 ls
 
-docker exec -it 34faa6 bash
+=> docker exec -it 34faa6 bash
 ls 
 
 ##Docker MYSQL
 
-docker run -dit -p 6666:3306 --name=docker-mysql --env="MYSQL_ROOT_PASSWORD=test1234" --env="MYSQL_DATABASE=emp" --env="MYSQL_USER=root" mysql
+=> docker run -dit -p 6666:3306 --name=docker-mysql --env="MYSQL_ROOT_PASSWORD=test1234" --env="MYSQL_DATABASE=emp" --env="MYSQL_USER=root" mysql
 
 //works 
- docker run -dit -p 6666:3306 --name=docker-mysql2 --env="MYSQL_ROOT_PASSWORD=test1234" --env="MYSQL_DATABASE=emp"  mysql
+=> docker run -dit -p 6666:3306 --name=docker-mysql2 --env="MYSQL_ROOT_PASSWORD=test1234" --env="MYSQL_DATABASE=emp"  mysql
 
-docker exec -it docker-mysql bash
+=> docker exec -it docker-mysql bash
 bash-5.1#  mysql -uroot -p // mysql -uprovideUserName -p //provide pass i.e test1234
 mysql> show databases
 mysql> show tables 
@@ -93,14 +93,14 @@ Bind Mount : uses folder in the host machine to commuicate the data
 Volume : Created will be maintained within the docker /var/lib/docker/volumes
 
 //Using Volume 
-docker volume ls  // lsit the voulmes 
-docker volume create myvolume 
+=> docker volume ls  // lsit the voulmes 
+=> docker volume create myvolume 
 
-docker run -dit --mount source=myvolume,destination=/tmp nginx
+=> docker run -dit --mount source=myvolume,destination=/tmp nginx
 ls /var/lib/docker/volumes
 ls /var/lib/docker/volumes/myvolume/_data
 
-docker exec -it acbf bash
+=> docker exec -it acbf bash
 cd /tmp
 ls
 touch myfile.txt //create file
@@ -113,8 +113,8 @@ ls /var/lib/docker/volumes/myvolume/_data
 mkdir mydata
 pwd (root)
 
-docker run -dit -v/root/mydata:/tmp ubuntu
-docker exec -it b4df4 bash 
+=> docker run -dit -v/root/mydata:/tmp ubuntu
+=> docker exec -it b4df4 bash 
 cd /tmp
 touch file.txt
 exit 
@@ -125,22 +125,23 @@ ls  //verify
 
 
 ##Docker Network 
-docker network ls 
-docker netwrk inspect bridge //details 
+=> docker network ls 
 
-docker network create demonwk --subnet=172.19.0.0/16
+=> docker network inspect bridge //details 
 
-docker run --name webserver --net demonwk --ip 172.19.0.2 -h web.anyhostname.com -p 81:80 -ti ubuntu /bin/bash
+=> docker network create demonwk --subnet=172.19.0.0/16
+
+=> docker run --name webserver --net demonwk --ip 172.19.0.2 -h web.anyhostname.com -p 81:80 -ti ubuntu /bin/bash
 
 when you're working with Docker, pressing Ctrl + P followed by Ctrl + Q is used to detach from a running Docker container and leave it running in the background. 
 
 The command : -> docker attach webserver  , allows you to attach your terminal session to a running Docker container named webserver
-docker attach webserver //reattach
+=> docker attach webserver //reattach
 
 //change the network or disconnect
 docker network disconnect demonwk webserver
 //verify 
-=>docker network demonwk
+=> docker network demonwk
 
 //connecting to the new network (bridge)to my container webserver
 => docker network connect bridge webserver
