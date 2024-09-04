@@ -93,7 +93,7 @@ Bind Mount : uses folder in the host machine to commuicate the data
 Volume : Created will be maintained within the docker /var/lib/docker/volumes
 
 //Using Volume 
-=> docker volume ls  // lsit the voulmes 
+=> docker volume ls  // list the volumes 
 => docker volume create myvolume 
 
 => docker run -dit --mount source=myvolume,destination=/tmp nginx
