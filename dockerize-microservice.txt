@@ -9,3 +9,41 @@ show databases;
 
 // use below 
 docker run -d -p 6666:3306 --name=docker-mysql2 -e MYSQL_ROOT_PASSWORD=admin@123 -e MYSQL_DATABASE=mydb mysql
+
+mvn clear package -DskipTests
+
+//Coupon service  Dockerfile
+FROM java:17
+LABEL authors="Prashant"
+ADD target/CouponService.jar CouponService.jar
+ENTRYPOINT ["java","-jar","CouponService.jar"]
+
+
+//Product service Dockerfile
+FROM java:17
+LABEL authors="Prashant"
+ADD target/ProductService.jar ProductService.jar
+ENTRYPOINT ["java","-jar","ProductService.jar"]
+
+
+Launch the Application Containers:
+
+docker build -f Dockerfile -t coupon_app .
+
+
+// link to link the application container to mysql container
+// --link containerName:imageName
+docker run -t --name=coupon-app --link docker-mysql2:mysql -p 10555:8085 coupon_app
+
+docker build -f Dockerfile -t product_app .
+
+// link to link the application container to mysql container
+// --link containerName:imageName
+docker run -t --link docker-mysql:mysql -p 10666:9090 product_app
+
+docker run -t --link docker-mysql2:mysql --link coupon-app:coupon_app -p 10666:8086 product_app
+
+
+Testing: 
+http://localhost:10555/coupon/createCoupon
+http://localhost:10666/product/
