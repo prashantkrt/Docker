@@ -1,0 +1,11 @@
+docker run -d -p 6666:3306 --name=docker-mysql --env="MYSQL_ROOT_PASSWORD=admin@123"
+--env="MYSQL_DATABASE=myDB" mysql
+
+docker exec -it docker-mysql bash
+
+mysql -uroot -p
+
+show databases;
+
+// use below 
+docker run -d -p 6666:3306 --name=docker-mysql2 -e MYSQL_ROOT_PASSWORD=admin@123 -e MYSQL_DATABASE=mydb mysql
