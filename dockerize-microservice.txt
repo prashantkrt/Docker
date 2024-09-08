@@ -47,3 +47,23 @@ docker run -t --link docker-mysql2:mysql --link coupon-app:coupon_app -p 10666:8
 Testing: 
 http://localhost:10555/coupon/createCoupon
 http://localhost:10666/product/
+
+
+##push to docker hub##
+
+//add the tag
+docker tag product_app prashantkrt/productservice
+docker tag coupon_app prashantkrt/couponservice
+
+//push
+docker push prashantkrt/productservice
+docker push prashantkrt/couponservice
+
+
+##Docker Prune Commnad##
+// deletes which are not in use or dangling
+docker container prune -a // will remove all the conatiner at once
+docker images prune -a // deletes all the images 
+
+docker rmi $(docker images -a)//deletes all
+docker rmi $(docker images -a -d)//deletes all not in use or dangling
