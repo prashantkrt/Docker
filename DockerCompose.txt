@@ -1,0 +1,10 @@
+Some useful commands with docker-compose:
+up 
+build 
+restart 
+scale  
+stop
+kill
+logs
+ps 
+

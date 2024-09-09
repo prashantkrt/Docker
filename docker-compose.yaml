@@ -1,0 +1,27 @@
+version: "3.3"
+
+services:
+   web:  #application name
+      image: httpd
+      container_name: mywebserver
+      ports:
+        - "8080:80"
+
+
+#same as 
+#docker run -dit --name mywebserver -p 8080:80 httpd
+   
+# Go to the file location of docker-compose.yml and execute the commands
+#docker-compose config ,  checks for error on the file
+#docker-compse up , brings the server up but don't starts it  
+#docker-compse up -d  , detach mode to stop the terminal lock  
+#docker-compose ps , shows the container list
+#dokcer-compose --help
+#docker-compose stop web(serviceName) , stops the container execution
+#docker-compose start web(serviceName), starts the container execution
+#docker-compose down , will down all the services running
+
+
+
+
+         
