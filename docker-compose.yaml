@@ -13,7 +13,7 @@ services:
    
 # Go to the file location of docker-compose.yml and execute the commands
 #docker-compose config ,  checks for error on the file
-#docker-compse up , brings the server up but don't starts it  
+#docker-compse up , brings all the services server up but don't starts it  
 #docker-compse up -d  , detach mode to stop the terminal lock  
 #docker-compose ps , shows the container list
 #dokcer-compose --help
