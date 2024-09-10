@@ -1,0 +1,25 @@
+version: "3.3"
+
+services:
+   web:  #application name
+      image: httpd
+      container_name: mywebserver
+      ports:
+        - "8080:80"
+      networks:
+        - webnetwork  
+      # volumes:
+      #    - myvol:/data #inside /data folder use this volume using bind example
+      volumes:      
+         - type: volume  ## using volume 
+           source: data  ## inside container 
+           destination: data # inside docker machine   
+
+networks: 
+    webnetwork: #network name
+      driver: bridge
+    dbnetwokk:
+     driver: bridge  
+
+volumes: 
+   myvol:     
