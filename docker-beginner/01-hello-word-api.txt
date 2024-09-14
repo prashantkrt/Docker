@@ -1,0 +1,41 @@
+##Manual
+
+=> docker run -d -t -i openjdk:latest  // -it helps to execute the commnds on the running container 
+=> docker exec containerName ls/tmp, exp:-   docker exec 61c55a ls tmp 
+=> docker cp target/*.jar containerName:/tmp, exp:-  docker cp target/*jar 61c55a:/tmp
+=> docker commit containerName hello:v1, exp:-   docker commit 61c55a hello:v1
+// better use commit in this way to change the CMD from jshell to java -jar myjarfilename.jar
+=> docker commit --change='CMD ["java","-jar","/tmp/hello-world-rest-api.jar"]' 61c55a  hello:v3
+=> docker run -p 8085:8080 hello:v1
+
+
+## Using Dockerfile
+
+FROM openjdk:latest
+EXPOSE 8085
+LABEL authors="Prashant"
+ADD target/*.jar hello-world.jar
+ENTRYPOINT ["java","-jar","hello-world.jar"]
+
+ => docker build -f Dockerfile -t hello:v1 .
+
+ => docker run -p 8085:8080 hello:v1
+
+
+ ##docker-compose.yml
+
+version: "3"
+
+services:
+  hello-world-app:
+    build: .
+    container_name: hello
+    restart: always
+    ports:
+      - 8085:8080
+
+
+ docker compose up     
+
+
+

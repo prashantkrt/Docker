@@ -58,6 +58,7 @@ usr
 var
 
 docker exec containerName ls/tmp
+docker exec 61c55a ls tmp 
 
 docker cp target/docker-demo.jar 7a96:/tmp
 
