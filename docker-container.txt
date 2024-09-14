@@ -1,0 +1,38 @@
+## container run
+=> docker container run -p 5000:3306 -d mysql 
+=> or docker run -p 5000:3306 -d mysql
+=> docker run -p --restart=always 5000:3306 -d mysql //autmoatically starts in case of docker-demon restart
+=> docker run -i -t -d nginx
+=> docker run -idt --name=myserver nginx
+=> docker run -itd --name=mynewserver -p 8000:80 nginx
+
+## pause 
+=> docker container pause containerName/id
+=> or docker pause containerId/name
+=> docker restart containerName
+
+## pause or unpause 
+=> docker container pause containerName/Id
+=> docker container unpause containerName/Id
+
+## stop(will give graceful-shutdown time to stop) mostly used 
+=> docker container stop containerName/Id 
+
+## kill( kills or stops immediately no time given, immediately terminates the process)
+=> docker kill containerName/Id
+
+## inspect, steps for contaier created or details or meta data 
+=> docker container inspect containerName/Id
+
+## list 
+=> docker container ls -a  // all container 
+=> docker container ls  // running container 
+=> docker ps -a  // all container 
+=> docker ps  // running container 
+
+## prune (except running all other stopped container will be deleted)
+=> docker container prune  // remove all the stopped containers 
+
+## logs 
+=> docker container logs -f containerId/Name (following new logs)
+=> docker container logs containerName/Name 

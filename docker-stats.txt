@@ -1,0 +1,17 @@
+## Events happened with-in docker , like monitoring
+=> docker events 
+
+## top to check what is the top process running in the container 
+=> docker top containerName/Id
+
+## stats gives the stats about the containers running like cpu utilization , memory etc..
+=> docker stats 
+
+## adding memory and cpu limits 
+## 100000 is 100% and 5000 is 5% cpu quota 
+=> docker run -p 5000:3306 -m 512m --cpu-quota 5000 -d mysql
+=> docker run -p 5000:3306 -m 1G --cpu-quota 10000 -d mysql
+
+
+## system (tells about the docker-demon using differnt things like images , volumes , network , container etc )
+=> docker system df 

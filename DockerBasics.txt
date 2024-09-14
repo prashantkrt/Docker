@@ -12,7 +12,9 @@ docker ps -a
 docker run hello-world
 docker images 
 docker ps -a 
+docker container ls -a  same as above 
 docker ps 
+docker container ls same as above
 docker run -it ubuntu bash
 docker images 
 docker ps
@@ -31,6 +33,10 @@ docker ps -a
 
 ## docker run
 => docker run -i -t -d nginx  // - interactive - terminal - detach (-dit)
+
+## docker logs 
+=> docker logs containerid/name
+=> docker logs -f containerName/id // it will follow the log if any new log comes in
 
 #assigning the name instead of random name
 => docker run -idt --name=myserver nginx  // assigning your name

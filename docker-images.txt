@@ -1,0 +1,20 @@
+## shows or list the images
+=> docker images 
+
+## define your own tag
+docker tag imageName:tagName imageName:newTagName 
+=> docker tag openjdk:latest openjdk:vv1
+
+## will be pulling the latest
+## just download to your local it doesn't run it 
+=> docker pull mysql 
+
+## search in docker
+=> docker search mysql
+
+## steps involved in creating the image
+=> docker image openjdk:lastest  
+=> docker images inspect imageId
+
+## docker remove 
+=> docker rmi imageName or docker remove imageName
