@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  product-app:
+    container_name: coupon-app
+    image: prashantkrt/productservice
+    restart: on-failure
+    ports:
+      - 10666:8086   # " is optional we can use " or without this both will work
+    depends_on:
+      - docker-mysql
+      - coupon-app
+    environment: #optional to use
+      WAIT_HOSTS: mysql:3306 # will be checking if mysql is up and running
+
+  coupon-app:
+    container_name: coupon-app
+    image: prashantkrt/couponservice
+    restart: on-failure
+    ports:
+      - 10555:8085   # " is optional we can use " or without this bot will work
+    depends_on:
+      - docker-mysql
+    environment: #optional to use
+      WAIT_HOSTS: mysql:3306 # will be checking if mysql is up and running
+
+  docker-mysql:
+    image: mysql
+    container_name: docker-mysql
+    restart: always # restart everytime if it fails
+    environment:
+      MYSQL_ROOT_PASSWORD: admin@123
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_HOST : '%' ## tell which ip access tge mysql on the container % anywhere or specific ip you can give
+    volumes:
+      - ./sql:/docker-entrypoint-init.d # will auto search in /sql folder for .sql file and will execute .sql automatically inside the container folder /docker-entrypoint-init.d
+    ports:
+      -  "6666:3306"
+    healthcheck:  ## optional
+      test: "/user/bin/mysql --user=root --password=admin@123 --execute \"SHOW DATABASES\""
+      interval: 4s  # in every 4s keep checking and execute
+      timeout: 20s
+      retries: 5 #frequency
+
+# /docker-entrypoint-init.d: This is a directory inside the container (commonly used in official database Docker images like PostgreSQL or MySQL)
+# When the container starts, the database service will automatically execute any SQL scripts or shell scripts placed in this directory.
